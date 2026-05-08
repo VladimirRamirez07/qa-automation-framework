@@ -1,0 +1,22 @@
+{
+  "name": "qa-automation-framework",
+  "version": "1.0.0",
+  "description": "Full QA automation framework: E2E with Playwright, API with Newman, Performance with k6, CI/CD with GitHub Actions and Allure reports",
+  "scripts": {
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:api": "newman run api/collections/api-tests.json -e api/environments/env.json -r allure --reporter-allure-export reports/allure-results",
+    "test:performance": "k6 run performance/load-test.js",
+    "test:all": "npm run test:e2e && npm run test:api",
+    "report:generate": "allure generate reports/allure-results --clean -o reports/allure-report",
+    "report:open": "allure open reports/allure-report",
+    "report:serve": "allure serve reports/allure-results"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "allure-commandline": "^2.32.0",
+    "allure-playwright": "^3.3.0",
+    "dotenv": "^16.5.0",
+    "newman": "^6.2.1"
+  }
+}

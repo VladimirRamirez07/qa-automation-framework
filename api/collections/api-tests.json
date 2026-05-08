@@ -1,0 +1,168 @@
+{
+  "info": {
+    "name": "Automation Exercise API Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "GET All Products List",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test('Response has products array', function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json).to.have.property('products');",
+                  "    pm.expect(json.products).to.be.an('array');",
+                  "});",
+                  "pm.test('Products list is not empty', function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json.products.length).to.be.above(0);",
+                  "});",
+                  "pm.test('Response time is less than 5000ms', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/productsList"
+          }
+        },
+        {
+          "name": "POST Search Product",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test('Search returns products', function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json).to.have.property('products');",
+                  "    pm.expect(json.products).to.be.an('array');",
+                  "});",
+                  "pm.test('Response time is less than 5000ms', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/searchProduct",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "search_product", "value": "dress" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST Search Product - Missing Parameter",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test('Returns error for missing parameter', function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json.responseCode).to.equal(400);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/searchProduct"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Brands",
+      "item": [
+        {
+          "name": "GET All Brands List",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test('Response has brands array', function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json).to.have.property('brands');",
+                  "    pm.expect(json.brands).to.be.an('array');",
+                  "});",
+                  "pm.test('Brands list is not empty', function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json.brands.length).to.be.above(0);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/brandsList"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "POST Verify Login - Invalid",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test('Returns error for invalid credentials', function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json.responseCode).to.equal(404);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/verifyLogin",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "email", "value": "invalid@test.com" },
+                { "key": "password", "value": "wrongpass" }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

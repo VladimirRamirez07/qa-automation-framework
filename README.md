@@ -23,33 +23,39 @@ A complete QA automation framework built from scratch, covering E2E testing, API
 ---
 
 ## 📁 Project Structure
+```
 qa-automation-framework/
+│
 ├── .github/
 │   └── workflows/
-│       └── qa-pipeline.yml       # CI/CD pipeline
+│       └── qa-pipeline.yml
+│
 ├── api/
 │   ├── collections/
-│   │   └── api-tests.json        # Newman test collection
+│   │   └── api-tests.json
 │   └── environments/
-│       └── env.json              # Environment variables
+│       └── env.json
+│
 ├── e2e/
-│   ├── fixtures/                 # Test data
-│   ├── pages/                    # Page Object Models
+│   ├── fixtures/
+│   ├── pages/
 │   │   ├── HomePage.js
 │   │   ├── LoginPage.js
 │   │   └── ProductsPage.js
-│   └── tests/                    # Test suites
+│   └── tests/
 │       ├── home.spec.js
 │       ├── login.spec.js
 │       └── products.spec.js
+│
 ├── performance/
-│   ├── load-test.js              # Normal load simulation
-│   ├── spike-test.js             # Spike traffic testing
-│   └── stress-test.js            # Stress testing
-├── .env.example                  # Environment template
+│   ├── load-test.js
+│   ├── stress-test.js
+│   └── spike-test.js
+│
+├── .env.example
 ├── package.json
 └── playwright.config.js
----
+```
 
 ## 🚀 Getting Started
 
@@ -134,16 +140,17 @@ npx playwright show-report reports/html-report
 
 Every push to `main` automatically triggers 3 parallel jobs:
 push to main
-│
-├── E2E Tests (Playwright)
-│     └── Chromium + Firefox + WebKit
-│
-├── API Tests (Newman)
-│     └── 14 assertions across 5 requests
-│
-└── Performance Tests (k6)
-└── Load test with 10 virtual users
----
+```
+     │
+     ├──► E2E Tests (Playwright)
+     │         └── Chromium + Firefox + WebKit
+     │
+     ├──► API Tests (Newman)
+     │         └── 14 assertions across 5 requests
+     │
+     └──► Performance Tests (k6)
+               └── Load test with 10 virtual users
+```
 
 ## 📈 Test Results
 
